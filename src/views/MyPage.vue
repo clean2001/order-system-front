@@ -49,7 +49,7 @@ export default {
         this.memberInfoList = [
             {key: "이름", value: this.memberInfo.name},
             {key: "email", value: this.memberInfo.email},
-            {key: "도시", value: this.memberInfo.city},
+            {key: "도시", value: this.memberInfo.city}, // ⭐️ API의 response에 맞게 써줘야함. 나는 address로 감싸지 않았기 때문에 이렇게 씀
             {key:"상세주소", value: this.memberInfo.street},
             {key: "우편번호", value: this.memberInfo.zipcode}
         ]
