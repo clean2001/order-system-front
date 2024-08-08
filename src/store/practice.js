@@ -2,7 +2,8 @@
 
 function initState() {
     return {
-        count: 0
+        count: 0,
+        recentMessage: "default message"
     }
 }
 
@@ -16,6 +17,10 @@ const practice = {
     mutations: {
         increment(state) {
             state.count++;
+        },
+        updateRecentMessage(state, message) {
+            console.log("line 22");
+            state.recentMessage = message;
         }
 
     },
@@ -24,12 +29,17 @@ const practice = {
         // 그러면 결국 컴포넌트는 actions의 함수를 호출
         incrementCount(context) { // 컨텍스트를 주입 받는다.
             context.commit('increment');
+        },
+        updateGlobalMessage(context, message) {
+            console.log("line 34");
+            context.commit('updateRecentMessage', message);
         }
 
     },
     // 상태(변수)를 get하기 위한 함수들의 집합
     getters: {
-        getCount: state => state.count
+        getCount: state => state.count,
+        getRecentMessage: state => state.recentMessage
     },
 
 }
