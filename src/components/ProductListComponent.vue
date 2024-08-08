@@ -28,7 +28,7 @@
             </v-form>
         </v-col>
         <v-col cols="auto" v-if="!isAdmin"> <!-- 장바구니, 주문하기 -->
-            <v-btn color="sid_green" class="mr-2">장바구니</v-btn>
+            <v-btn @click="addCart" color="sid_green" class="mr-2">장바구니</v-btn>
             <v-btn @click="createOrder" color="sid_btn1">주문하기</v-btn>
         </v-col>
         <v-col cols="auto" v-if="isAdmin">
@@ -92,7 +92,8 @@
 </v-container>
 </template>
 <script>
-import axios from 'axios';
+import axios from 'axios'
+import { mapGetters } from 'vuex'
 
 export default {
     props: ['isAdmin', 'pageTitle'],
@@ -133,6 +134,19 @@ export default {
             this.isLastPage = false;
 
             this.loadProduct(); // loadProduct 호출
+        },
+        addCart() {
+            const orderProducts = Object.keys(this.selected)
+                .filter(key => this.selected[key]).map(key=>{
+                    const product = this.productList.find(p => p.id == key)
+
+                    // 키:밸류를 전역 변수를 받는 화면에 맞춰주어야한다.
+                    return { id: product.id, name: product.name, quantity: product.quantity };
+                }); // 객체에서 키값만 뽑아냄
+            
+                orderProducts.forEach(p => this.$store.dispatch('addCart', p));
+                console.log(this.getProductsInCart);
+                // window.location.reload(); // 잠깐 주석처리!!!!
         },
         async loadProduct() {
             try {
@@ -225,6 +239,9 @@ export default {
     created() { // 훅 메서드
         this.loadProduct(); // this.loadProduct로 호출해주어야한다.
         window.addEventListener('scroll', this.scrollPagination); // 스크롤을 움직였을 때
+    },
+    computed: {
+        ...mapGetters(['getProductsInCart'])
     },
     beforeUnmount() {
         window.removeEventListener('scroll', this.scrollPagination); // 이벤트 리스너 제거

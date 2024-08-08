@@ -13,7 +13,7 @@
                     <v-btn :to="{path:'/'}" color="sid_btn2">java shop</v-btn>
                 </v-col>
                 <v-col class="d-flex justify-end"> <!--d-flex justify-start: 전체를 우측 정렬-->
-                    <v-btn v-if="isLogin" :to="{path:'/product/list'}">장바구니</v-btn>
+                    <v-btn v-if="isLogin" :to="{path:'/order/cart'}">장바구니({{ getTotalQuantity }})</v-btn>
                     <v-btn :to="{path:'/product/list'}">상품 목록</v-btn>
                     <v-btn v-if="isLogin" :to="{path:'/mypage'}">마이페이지</v-btn>
                     <v-btn v-if="!isLogin" :to="{path:'/member/create'}">회원 가입</v-btn>
@@ -26,6 +26,8 @@
     </v-app-bar>
 </template>
 <script>
+import { mapGetters } from 'vuex'
+
 export default{
     data() {
         return {
@@ -40,6 +42,9 @@ export default{
             this.userRole = localStorage.getItem("role");
             console.log('role' + this.userRole);
         }
+    },
+    computed: {
+        ...mapGetters(['getTotalQuantity'])
     },
     methods: {
         doLogout() {
