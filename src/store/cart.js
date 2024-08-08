@@ -26,12 +26,19 @@ const practice = {
                 state.productsInCart.push(product);
             }
 
-            state.totalQuantity += product.quantity;
+            state.totalQuantity = parseInt(state.totalQuantity) + product.quantity;
 
             // 로컬 스토리지에 데이터 직렬화하여 삽입
             localStorage.setItem('productsInCart', JSON.stringify(state.productsInCart)); // 기존에 뭐가 있든지, 갈아끼우기
             localStorage.setItem('totalQuantity', JSON.stringify(state.totalQuantity));
         },
+        clearCart(state) {
+            state.productsInCart = [];
+            state.totalQuantity = 0;
+
+            localStorage.removeItem('productsInCart');
+            localStorage.removeItem('totalQuantity');
+        }
     },
     actions: {
         // 아래와 같이 actions의 함수를 통해 mutation의 함수를 호출한다.
@@ -39,6 +46,9 @@ const practice = {
         addCart(context, product) { // 컨텍스트를 주입 받는다.
             context.commit('addCart', product);
         },
+        clearCart(context) {
+            context.commit('clearCart');
+        }
     },
     // 상태(변수)를 get하기 위한 함수들의 집합
     getters: {

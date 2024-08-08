@@ -146,7 +146,7 @@ export default {
             
                 orderProducts.forEach(p => this.$store.dispatch('addCart', p));
                 console.log(this.getProductsInCart);
-                // window.location.reload(); // 잠깐 주석처리!!!!
+                window.location.reload(); // 잠깐 주석처리!!!!
         },
         async loadProduct() {
             try {
