@@ -61,6 +61,7 @@
                 <v-text-field label="email" type="email"></v-text-field>
                 <v-text-field label="name" type="text"></v-text-field>
                 <v-text-field label="password" type="password"></v-text-field>
+                
                 <v-btn>제출</v-btn>
             </v-form>
         </v-card-text>
@@ -83,6 +84,7 @@
      </v-dialog>
     
      <!-- 1번 방법 href: 실시간으로 데이터가 변경되고 있는 경우 이 방법을 쓰자. -->
+      <!-- html 상에서 이동. 템플릿 안에서 이동 -->
      <v-btn href="/practice/modeling">라우팅 1</v-btn>  
      <v-btn :to="{path: '/practice/modeling'}">SPA 라우팅(router 기능 활용)</v-btn>
      <v-btn :to="{name: 'ModelingComponent' /* 라우터의 이름으로 라우팅 */}">SPA 라우팅(router 기능 활용)</v-btn>

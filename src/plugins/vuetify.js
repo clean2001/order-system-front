@@ -4,6 +4,7 @@ import * as components from 'vuetify/components';
 import * as directives from 'vuetify/directives';
 import 'vuetify/styles'
 import colors from 'vuetify/util/colors' // 색깔을 임포트 해야한다.
+import { mdi } from 'vuetify/iconsets/mdi'; 
 
 export default createVuetify({
     // 뷰티파이에서 사용할 수 있는 UI 컴포넌트들을 의미한다.
@@ -11,6 +12,14 @@ export default createVuetify({
     
     // 행동 요소들. 뷰티파이에서 html 요소에 행동을 부여하는 데 사용된다.
     directives,
+
+    // prepend icon 설정
+    icons: {
+      defaultSet: 'mdi',
+      sets: {
+        mdi,
+      }
+    },
     theme: {
         themes: {
           light: {

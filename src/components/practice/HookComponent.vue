@@ -27,6 +27,8 @@ export default {
     // 컴포넌트가 화면에서 제거될 때 아래 함수 실행. beforeDestroy로 사용하기도 함.
     // 화면을 떠날 때 연결을 끊어줘야하는 상황들 예시. 웹 소켓, sse 연결 등 서버와의 연결을 끊어주고 나가야하는 시점
     beforeUnmount() { // ⭐️ 서버와의 연결을 끊어주어야하는 시점
+        alert("unmount!!!!");
+        console.log("unmount!");
         window.removeEventListener('resize', this.resize);
     },
     methods: {
