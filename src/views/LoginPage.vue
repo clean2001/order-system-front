@@ -71,7 +71,10 @@ export default{
                 localStorage.setItem('refreshToken', refreshToken);
                 localStorage.setItem('role', role);
 
-                // this.$router.push("/"); // <- 이렇게 하면
+                // sse 연결 코드 => 이 로그인 시점에 있으면 안됨!! 왜냐면 로그인 액션을 취하는 시점에서만 유효해짐
+
+
+                // this.$router.push("/"); // <- 이렇게 하면 헤더부는 created 호출이 안됨
                 window.location.href = '/';
             } catch(e) {
                 console.log(e.response.data.errorMessage);

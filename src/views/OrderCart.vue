@@ -59,6 +59,7 @@ export default {
             const orderProducts = this.getProductsInCart.map(p => {
                 return { productId: p.id,  quantity: p.quantity}
             });
+            console.log(orderProducts);
             // 체크
             console.log(orderProducts);
             if(orderProducts.length < 1) {
