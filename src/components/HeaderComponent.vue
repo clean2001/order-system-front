@@ -6,7 +6,7 @@
                     <div v-if="userRole == 'ADMIN'">
                         <v-btn :to="{path:'/member/list'}">회원 관리</v-btn>
                         <v-btn :to="{path:'/product/manage'}">상품 관리</v-btn>
-                        <v-btn :to="{path:'/order/list'}">실시간 주문</v-btn>
+                        <v-btn href="/order/list">실시간 주문({{ liveQuantity }})</v-btn>
                     </div>
                 </v-col>
                 <v-col class="text-center">
@@ -34,7 +34,8 @@ export default{
     data() {
         return {
             userRole: null,
-            isLogin: false
+            isLogin: false,
+            liveQuantity: 0
         }
     },
     created() {
@@ -51,6 +52,18 @@ export default{
             sse.addEventListener('connect', (event) => {
                 console.log(event);
             }); // connect라는 이름의 이벤트가 들어오면
+
+            // 주문 발생 이벤트
+            sse.addEventListener('ordered', (event) => {
+                console.log(event);
+                console.log(event.data);
+                this.liveQuantity++;
+            }); // ordered라는 이름의 이벤트가 들어오면
+
+            sse.onerror = (error) => {
+                console.log(error);
+                sse.close();
+            }
         }
     },
     computed: {
