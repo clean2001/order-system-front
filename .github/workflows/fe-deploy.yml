@@ -1,5 +1,5 @@
 name: deploy to aws s3
-# main 브랜치에 push 될 때 현재 스크립트 실행 트리거 발동
+# main 브랜치에 push 될 때 현재 스크립트 실행 트리거
 on:
   push:
     branches:
